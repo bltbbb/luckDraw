@@ -1,0 +1,62 @@
+{
+	"description": "minisoAward",
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"miniprogramRoot": "dist/",
+	"compileType": "miniprogram",
+	"appid": "wx907d6d6b7eba0cb9",
+	"projectname": "luckDraw",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": 0,
+					"name": "小程序跳转",
+					"pathName": "pages/index/main",
+					"query": "",
+					"scene": "1037",
+					"referrerInfo": {
+						"appId": "wx2a212470bade49bf",
+						"extraData": "{ \"data\":{         \"nick\":\"阿苏\",         \"uid\":\"o4UFG47DAc33UI10Evue8QsnmB3E\",         \"mobile\":\"13726248256\",         \"pic\":\"https://wx.qlogo.cn/mmopen/vi_32/FbhoMmb75b35tCUlQOVJbV5TcdibYRZvSPOWee9F3ibrOhIzpsNrMnwZJ2VZexuwSgUuPagDePzGP8PW7jrx1uxQ/132\",         \"ts\":1547718756665     },     \"sign\":\"17TV0ZuKzx8GAj/jDPTOOd9Wx8xS2AMUKZPPhPYEIomwTRsyxvSb7T1uCZWDLl2u0073+mVOWCsk0xXkM+P5q94mvpdR1LBBKMH/ImXRHYCfa6JJoqkaSlimnhXgJnxtYg+/McyrX4lcdXxJ4M4EYMNIVX8c8qBrx+3YnqVcGq8=\"}"
+					}
+				},
+				{
+					"id": -1,
+					"name": "卡券",
+					"pathName": "pages/card-list/main",
+					"query": "",
+					"scene": "1007"
+				},
+				{
+					"id": -1,
+					"name": "分享",
+					"pathName": "pages/share/main",
+					"query": ""
+				}
+			]
+		}
+	}
+}

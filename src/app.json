@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/card-list/main",
+    "pages/share/main"
+  ],
+  "permission": {},
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "??",
+    "navigationBarTextStyle": "black"
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx2a212470bade49bf"
+  ]
+}

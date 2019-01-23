@@ -1,0 +1,41 @@
+// 公共样式
+@import './variable.scss';
+html,
+div,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+b,
+strong,
+input,
+view {
+    font-family: PingFangSC-Regular, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    outline: 0;
+    font-size: $font28;
+}
+
+html,body,page {
+    min-height: 100%;
+    background: #F5F5F5;
+}
+
+img, image {
+    display: block;
+    outline: 0;
+    border: 0;
+}
+.center {
+    text-align: center;
+}
