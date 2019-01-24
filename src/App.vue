@@ -1,9 +1,13 @@
 <script>
 export default {
   onShow(options) {
-    if (Object.keys(options.referrerInfo).length > 0) {
+    console.log(options.referrerInfo.extraData);
+    if (
+      options.referrerInfo.appId &&
+      options.referrerInfo.appId === "wx2a212470bade49bf"
+    ) {
       wx.setStorage({
-        key: "userInfo",
+        key: "userInfoMiniso",
         data: options.referrerInfo.extraData
       });
     }

@@ -55,6 +55,13 @@
 					"name": "分享",
 					"pathName": "pages/share/main",
 					"query": ""
+				},
+				{
+					"id": 3,
+					"name": "小程序跳转",
+					"pathName": "pages/index/main",
+					"query": "",
+					"scene": "1012"
 				}
 			]
 		}

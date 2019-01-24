@@ -4,10 +4,10 @@
       <img src="/static/images/bg.gif" mode="widthFix" alt="">
       <div class="header">
         <div class="left" @tap="goMiniso">
-          <img class="img_wrapper" src="/static/images/avatar.png" alt="" v-if="!userData.nick">
-          <img class="img_wrapper" src="/static/images/avatar_wrapper.png" alt="" v-if="userData.nick">
-          <img class="img_content" :src="userData.pic" alt="" v-if="userData.nick">
-          <span>{{nickname}}</span>
+          <img class="img_wrapper" src="/static/images/avatar.png" alt="" v-if="!userInfo.nick">
+          <img class="img_wrapper" src="/static/images/avatar_wrapper.png" alt="" v-if="userInfo.nick">
+          <img class="img_content" :src="userInfo.pic" alt="" v-if="userInfo.nick">
+          <span>{{userInfo.nick ? userInfo.nick :"未登录"}}</span>
         </div>
         <div class="right" @tap="goCard">
           <img src="/static/images/icon_kaquan.png" alt="">
@@ -89,18 +89,20 @@ export default {
   },
   methods: {
     draw() {
-      if (this.errNo) {
-        wx.showToast({
-          title: "活动异常",
-          icon: "none"
-        });
-        this.initUser();
+      if (!this.userInfo.nick) {
+        this.showGuide = true;
       } else {
-        if (Object.keys(this.userData).length === 0) {
-          this.showGuide = true;
+        if (this.errNo) {
+          wx.showToast({
+            title: "活动异常",
+            icon: "none"
+          });
+          this.initUser();
         } else {
           if (this.canDraw) {
             this.drawAward();
+          } else {
+            this.initUser();
           }
         }
       }
@@ -256,11 +258,12 @@ export default {
   onLoad() {
     const _that = this;
     wx.getStorage({
-      key: "userInfo",
+      key: "userInfoMiniso",
       success(res) {
         _that.userInfo = res.data;
         _that.initUser();
-      }
+      },
+      fail() {}
     });
   },
   onUnload() {

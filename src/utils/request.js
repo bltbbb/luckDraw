@@ -47,11 +47,11 @@ fly.interceptors.response.use(
     return res
   },
   (err) => {
-    wx.showToast({
-      title: '活动异常',
-      icon: "none",
-      duration: 2000
-    })
+    // wx.showToast({
+    //   title: '活动异常',
+    //   icon: "none",
+    //   duration: 2000
+    // })
     wx.hideNavigationBarLoading()// 导航条加载动画
     // 捕获错误
     return Promise.reject(err.response)
