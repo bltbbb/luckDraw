@@ -22,7 +22,6 @@
               <div class="t_right">
                 <span class="rule">{{item.useRule}}</span>
                 <span class="time">2019.02.04-2019.02.10</span>
-                <span class="tips">详看使用规则</span>
               </div>
             </div>
           </div>
@@ -41,7 +40,6 @@
                 <div class="t_right ">
                   <span class="rule ">{{item.useRule}}</span>
                   <span class="time ">2019.02.04-2019.02.10</span>
-                  <span class="tips ">详看使用规则</span>
                 </div>
               </div>
               <div class="hadUse ">

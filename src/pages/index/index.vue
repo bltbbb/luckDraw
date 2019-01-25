@@ -4,10 +4,14 @@
       <img src="/static/images/bg.gif" mode="widthFix" alt="">
       <div class="header">
         <div class="left" @tap="goMiniso">
-          <img class="img_wrapper" src="/static/images/avatar.png" alt="" v-if="!userInfo.nick">
-          <img class="img_wrapper" src="/static/images/avatar_wrapper.png" alt="" v-if="userInfo.nick">
-          <img class="img_content" :src="userInfo.pic" alt="" v-if="userInfo.nick">
-          <span>{{userInfo.nick ? userInfo.nick :"未登录"}}</span>
+          <img class="img_wrapper" src="/static/images/avatar.png" alt="" v-if="!userInfo.data">
+          <!-- <img class="img_wrapper" src="/static/images/avatar_wrapper.png" alt="" v-if="userInfo.data"> -->
+          <view class="userinfo-avatar" v-if="userInfo.data">
+            <open-data class="img_content" type="userAvatarUrl"></open-data>
+          </view>
+          <!-- <img class="img_content" :src="userInfo.data.pic" alt="" v-if="userInfo.data"> -->
+          <span v-if="!userInfo.data">未登录"</span>
+          <open-data class="nickName" type="userNickName" v-if="userInfo.data"></open-data>
         </div>
         <div class="right" @tap="goCard">
           <img src="/static/images/icon_kaquan.png" alt="">
@@ -89,7 +93,7 @@ export default {
   },
   methods: {
     draw() {
-      if (!this.userInfo.nick) {
+      if (!this.userInfo.data) {
         this.showGuide = true;
       } else {
         if (this.errNo) {
@@ -112,6 +116,7 @@ export default {
         uid: this.userData.uid,
         activityId: 1
       };
+      const _that = this;
       let res = await this.$mutils.fetchData(API.DRAW, data, "post");
       this.count = 1;
       if (res.code === 200) {
@@ -130,7 +135,7 @@ export default {
           success(res) {
             if (res.confirm) {
               wx.navigateTo({
-                url: `../share/main?uid=${this.userData.uid}`
+                url: `../share/main?uid=${_that.userData.uid}`
               });
             }
           }
@@ -175,7 +180,7 @@ export default {
       this.$mutils
         .fetchData(API.DETAIL, data)
         .then(res => {
-          if (res.code === 200 && res.data.activityStatus === 1) {
+          if (res.code === 200 && res.data.activityStatus === "1") {
             this.canDraw = true;
             this.errNo = false;
           } else {
@@ -191,6 +196,9 @@ export default {
         });
     },
     goMiniso() {
+      if (this.userData.nick) {
+        return;
+      }
       wx.navigateToMiniProgram({
         appId: "wx2a212470bade49bf",
         path: "pages/index/index",

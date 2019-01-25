@@ -40,7 +40,7 @@
 					"scene": "1037",
 					"referrerInfo": {
 						"appId": "wx2a212470bade49bf",
-						"extraData": "{ \"data\":{         \"nick\":\"阿苏\",         \"uid\":\"o4UFG47DAc33UI10Evue8QsnmB3E\",         \"mobile\":\"13726248256\",         \"pic\":\"https://wx.qlogo.cn/mmopen/vi_32/FbhoMmb75b35tCUlQOVJbV5TcdibYRZvSPOWee9F3ibrOhIzpsNrMnwZJ2VZexuwSgUuPagDePzGP8PW7jrx1uxQ/132\",         \"ts\":1547718756665     },     \"sign\":\"17TV0ZuKzx8GAj/jDPTOOd9Wx8xS2AMUKZPPhPYEIomwTRsyxvSb7T1uCZWDLl2u0073+mVOWCsk0xXkM+P5q94mvpdR1LBBKMH/ImXRHYCfa6JJoqkaSlimnhXgJnxtYg+/McyrX4lcdXxJ4M4EYMNIVX8c8qBrx+3YnqVcGq8=\"}"
+						"extraData": "{   \"sign\" : \"Gt0v\\/qqtuTOJ0aeov57vqrcqUWGVPTt9hayX2Rnr1EWP0hPyBbUrafcL2qiYLmmK60HAts0p4oj5\\/QqfA7dijHmxt7fbrOYDSUPXNeea3uTzCQx5UDKqdF957eOoZ1dUpjGbVdC63VQBd9Ay7XEwzolxuPZCykTk0h8ceQj9hXY=\",   \"data\" : {     \"ts\" : 1548386620297,     \"mobile\" : \"18780197868\",     \"nick\" : \"lon\",     \"uid\" : \"o4UFG4zojuer9nUQWcGIGsZx2q9A\",     \"pic\" : \"\"   } }"
 					}
 				},
 				{

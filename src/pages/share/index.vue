@@ -1,6 +1,6 @@
 <template>
   <div class="share">
-    <img src="/static/images/share.png" mode="widthFix" alt="">
+    <img src="/static/images/share.png" :class="{spacial:!common}" mode="widthFix" alt="">
     <button @tap="savaPic" v-if="auth">保存图片</button>
     <button @tap="openSetting" v-if="!auth">保存图片</button>
   </div>
@@ -12,7 +12,8 @@ export default {
   data() {
     return {
       auth: true,
-      uid: ""
+      uid: "",
+      common: true
     };
   },
   methods: {
@@ -26,7 +27,7 @@ export default {
               success() {
                 // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
                 wx.saveImageToPhotosAlbum({
-                  filePath: "/static/images/share.jpg",
+                  filePath: "/static/images/share.png",
                   success(res) {
                     console.log("保存成功");
                   },
@@ -50,7 +51,7 @@ export default {
             });
           } else {
             wx.saveImageToPhotosAlbum({
-              filePath: "/static/images/share.jpg",
+              filePath: "/static/images/share.png",
               success(res) {
                 _that.addPoints();
                 console.log("保存成功");
@@ -91,6 +92,13 @@ export default {
   },
   onLoad(options) {
     this.uid = options.uid;
+    const sysInfo = wx.getSystemInfoSync();
+    const height = sysInfo.windowHeight;
+    if (height < 700) {
+      this.common = true;
+    } else {
+      this.common = false;
+    }
   }
 };
 </script>
@@ -103,12 +111,15 @@ export default {
   img {
     position: absolute;
     left: 0;
-    top: 0;
+    top: -220rpx;
     width: 100%;
+    &.spacial {
+      top: -130rpx;
+    }
   }
   button {
     position: fixed;
-    top: 1040rpx;
+    bottom: 40rpx;
     left: 75rpx;
     width: 600rpx;
     height: 88rpx;
