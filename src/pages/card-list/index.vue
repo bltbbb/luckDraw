@@ -12,7 +12,7 @@
     <swiper :current="currentTab" duration="300" @change="swiperTab" v-if="cardList.length > 0" :style="{height:currentTab==0?allHeight:didHeight}">
       <swiper-item>
         <div class="list_wrapper">
-          <div class="item" v-for="(item,index) in cardList" :key="index">
+          <div class="item" v-for="(item,index) in cardList" :key="index" @tap="cardDtail(item)">
             <img src="/static/images/bg_kaquan.png" mode="widthFix" alt="">
             <div class="text">
               <div class="t_left">
@@ -20,7 +20,7 @@
                 <span class="num">{{item.faceValue}}</span>
               </div>
               <div class="t_right">
-                <span class="rule">{{item.useRule}}</span>
+                <span class="rule">{{item.name}}</span>
                 <span class="time">2019.02.04-2019.02.10</span>
               </div>
             </div>
@@ -50,11 +50,51 @@
         </view>
       </swiper-item>
     </swiper>
+    <div class="screen" v-if="showScreen">
+      <img class="bg" src="/static/images/card_list.png" alt="">
+      <img class="close" @tap="closeScreen" src="/static/images/icon_close.png" mode="widthFix" alt="">
+      <div class="num">
+        <div class="top">
+          <text class="symbol">￥</text>
+          <text class="num">{{currentNum}}</text>
+          <text class="normal">红包代金券</text>
+        </div>
+        <div class="bottom">
+          <text>- </text>
+          <text>{{currentRule}}</text>
+          <text> -</text>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="header">
+          <span>有效期：</span>
+          <span>{{start}}</span>
+          <span> - </span>
+          <span>{{end}}</span>
+        </div>
+        <div class="detail">
+          <span>
+            1、在中国大陆地区任意名创优品门店（西藏地区除外）。
+          </span>
+          <br>
+          <span>
+            2、消费满148元可用10元及以下面额红包、消费满148元可用所有面额红包（单笔订单仅可使用一张红包券），直接抵扣现金。
+          </span>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="header">请与结账前出示给收银员</div>
+        <div class="barcode">
+          <canvas style="width:611rpx;height:120rpx;" canvas-id="barcode" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import API from "../../api/index";
+import wxbarcode from "wxbarcode";
 
 export default {
   data() {
@@ -64,7 +104,13 @@ export default {
       currentTab: 0,
       useHeight: 0,
       uid: "",
-      cardList: []
+      cardList: [],
+      showScreen: false,
+      currentNum: 0,
+      currentRule: "",
+      start: "",
+      end: "",
+      code: ""
     };
   },
   methods: {
@@ -91,6 +137,17 @@ export default {
             20 +
             "rpx"
           : this.useHeight + "px";
+    },
+    cardDtail(data) {
+      this.showScreen = true;
+      this.currentNum = data.faceValue;
+      this.currentRule = data.name;
+      this.start = data.beginDate.split(" ")[0];
+      this.end = data.endDate.split(" ")[0];
+      wxbarcode.barcode("barcode", data.code, 611, 120);
+    },
+    closeScreen() {
+      this.showScreen = false;
     },
     draw() {
       wx.navigateBack({
