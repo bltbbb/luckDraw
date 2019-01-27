@@ -1,7 +1,7 @@
 <template>
   <div class="card-list">
     <view class="swiper-tab">
-      <view :class="currentTab==0?'active':''" class="swiper-tab-item" data-current="0" @tap="clickTab">全部</view>
+      <view :class="currentTab==0?'active':''" class="swiper-tab-item" data-current="0" @tap="clickTab">待使用</view>
       <view :class="currentTab==1?'active':''" class="swiper-tab-item" data-current="1" @tap="clickTab">已使用</view>
     </view>
     <div class="empty" v-if="cardList.length === 0">
@@ -9,10 +9,10 @@
       <span>亲，你还没有现金券哦</span>
       <button @tap="draw">马上去抽奖</button>
     </div>
-    <swiper :current="currentTab" duration="300" @change="swiperTab" v-if="cardList.length > 0" :style="{height:currentTab==0?allHeight:didHeight}">
+    <swiper :current="currentTab" duration="300" @change="swiperTab" v-if="cardList.length > 0" :style="{height:currentTab==0?allHeight:didHeight}"  >
       <swiper-item>
         <div class="list_wrapper">
-          <div class="item" v-for="(item,index) in cardList" :key="index" @tap="cardDtail(item)">
+          <div class="item" v-for="(item,index) in cardList" :key="index" @tap="cardDtail(item)" v-if="item.status === '未使用' ">
             <img src="/static/images/bg_kaquan.png" mode="widthFix" alt="">
             <div class="text">
               <div class="t_left">
@@ -50,7 +50,7 @@
         </view>
       </swiper-item>
     </swiper>
-    <div class="screen" v-if="showScreen">
+    <div class="screen" v-if="showScreen" catchtouchmove>
       <img class="bg" src="/static/images/card_list.png" alt="">
       <img class="close" @tap="closeScreen" src="/static/images/icon_close.png" mode="widthFix" alt="">
       <div class="num">
@@ -83,9 +83,12 @@
         </div>
       </div>
       <div class="bottom">
-        <div class="header">请与结账前出示给收银员</div>
+        <div class="header">请于结账前出示给收银员</div>
         <div class="barcode">
           <canvas style="width:611rpx;height:120rpx;" canvas-id="barcode" />
+        </div>
+        <div class="code">
+          {{code}}
         </div>
       </div>
     </div>
@@ -144,10 +147,12 @@ export default {
       this.currentRule = data.name;
       this.start = data.beginDate.split(" ")[0];
       this.end = data.endDate.split(" ")[0];
+      this.code = data.code;
       wxbarcode.barcode("barcode", data.code, 611, 120);
     },
     closeScreen() {
       this.showScreen = false;
+      this.getList();
     },
     draw() {
       wx.navigateBack({

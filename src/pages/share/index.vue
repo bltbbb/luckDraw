@@ -29,6 +29,7 @@ export default {
                 wx.saveImageToPhotosAlbum({
                   filePath: "/static/images/share.png",
                   success(res) {
+                    _that.addPoints();
                     console.log("保存成功");
                   },
                   fail(res) {

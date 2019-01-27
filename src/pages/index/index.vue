@@ -10,7 +10,7 @@
             <open-data class="img_content" type="userAvatarUrl"></open-data>
           </view>
           <!-- <img class="img_content" :src="userInfo.data.pic" alt="" v-if="userInfo.data"> -->
-          <span v-if="!userInfo.data">未登录"</span>
+          <span v-if="!userInfo.data">未登录</span>
           <open-data class="nickName" type="userNickName" v-if="userInfo.data"></open-data>
         </div>
         <div class="right" @tap="goCard">
@@ -82,6 +82,7 @@
 </template>
 <script>
 import API from "../../api/index";
+import { setTimeout } from "timers";
 
 export default {
   data() {
@@ -102,7 +103,10 @@ export default {
   methods: {
     draw() {
       if (!this.userInfo.data) {
-        this.showGuide = true;
+        this.gotoTop();
+        setTimeout(() => {
+          this.showGuide = true;
+        }, 200);
       } else {
         if (this.errNo) {
           wx.showToast({
@@ -117,6 +121,16 @@ export default {
             this.initUser();
           }
         }
+      }
+    },
+    gotoTop() {
+      if (wx.pageScrollTo) {
+        wx.pageScrollTo({
+          scrollTop: 0,
+          duration: 200
+        });
+      } else {
+        this.showGuide = true;
       }
     },
     async drawAward() {

@@ -185,6 +185,7 @@ swiper {
                 color: rgba(217, 35, 47, 1);
             }
             .normal {
+                padding-left: 14rpx;
                 font-size: 24rpx;
                 font-family: PingFang-SC-Bold;
                 font-weight: bold;
@@ -229,7 +230,7 @@ swiper {
     }
     .bottom {
         position: absolute;
-        top: 653rpx;
+        top: 643rpx;
         left: 62rpx;
         .header {
             width: 100%;
@@ -241,6 +242,18 @@ swiper {
         }
         .barcode {
             margin-top: 43rpx;
+        }
+        .code {
+            width: 611rpx;
+            height: 40rpx;
+            text-align: center;
+            margin-top: 6rpx;
+            font-size: 24rpx;
+            font-family: PingFang-SC-Medium;
+            font-weight: 500;
+            color: rgba(51, 51, 51, 1);
+            letter-spacing: 14rpx;
+            padding-left: 10rpx;
         }
     }
     .close {
