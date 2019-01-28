@@ -103,8 +103,35 @@
             height: 100%;
         }
     }
+    .clickShow {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 14rpx;
+        span {
+            font-size: 24rpx;
+            font-family: PingFang-SC-Regular;
+            font-weight: 400;
+            color: rgba(51, 51, 51, 1);
+            line-height: 36rpx;
+        }
+        img {
+            width: 18rpx;
+            height: 10rpx;
+            margin-left: 8rpx;
+            &.rate {
+                transform: rotate(180deg);
+            }
+        }
+    }
     .main {
         margin-top: 25rpx;
+        overflow: hidden;
+        height: 0;
+        transition: 0.3s;
+        &.show {
+            height: auto;
+        }
         li {
             overflow: hidden;
             span {

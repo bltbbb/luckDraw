@@ -1,8 +1,9 @@
 <template>
   <div class="share">
-    <img src="/static/images/share.png" :class="{spacial:!common}" mode="widthFix" alt="">
+    <img class="share_img" src="/static/images/share.png" :class="{spacial:!common}" mode="widthFix" alt="">
     <button @tap="savaPic" v-if="auth">保存图片</button>
     <button @tap="openSetting" v-if="!auth">保存图片</button>
+    <img class="bg_share" src="/static/images/bg_share.png" mode="widthFix" v-if="bgShareShow" @tap="bgShareShow = false" alt="" catchtouchmove>
   </div>
 </template>
 
@@ -11,6 +12,7 @@ import API from "../../api/index";
 export default {
   data() {
     return {
+      bgShareShow: true,
       auth: true,
       uid: "",
       common: true
@@ -109,7 +111,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  img {
+  .share_img {
     position: absolute;
     left: 0;
     top: -220rpx;
@@ -135,6 +137,12 @@ export default {
     );
     box-shadow: 0px 3rpx 10rpx 0rpx rgba(232, 20, 20, 0.68);
     border-radius: 44rpx;
+  }
+  .bg_share {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
   }
 }
 </style>

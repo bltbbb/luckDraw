@@ -26,7 +26,11 @@
       <div class="header">
         <img src="/static/images/rule.png" alt="">
       </div>
-      <div class="main">
+      <div class="clickShow" @tap="clickShow">
+        <span>{{ruleTips}}</span>
+        <img src="/static/images/down.png" :class="{rate:show_rule}" alt="">
+      </div>
+      <div class="main" :class="{show:show_rule}">
         <li>
           <i class="circle"></i>
           <span class="title">活动时间：</span><br>
@@ -97,7 +101,10 @@ export default {
       canDraw: false,
       userData: {},
       errNo: false,
-      awardNum: 0
+      awardNum: 0,
+      show_rule: false,
+      scroll: 0,
+      ruleTips: "点击查看活动规则"
     };
   },
   methods: {
@@ -169,6 +176,29 @@ export default {
           duration: 2000,
           mask: true
         });
+      }
+    },
+    clickShow() {
+      if (wx.pageScrollTo) {
+        if (!this.show_rule) {
+          this.show_rule = true;
+          this.ruleTips = "点击收起活动规则";
+          setTimeout(() => {
+            wx.pageScrollTo({
+              scrollTop: this.scroll + 1000,
+              duration: 400
+            });
+          }, 100);
+        } else {
+          this.ruleTips = "点击查看活动规则";
+          wx.pageScrollTo({
+            scrollTop: 0,
+            duration: 400
+          });
+          setTimeout(() => {
+            this.show_rule = false;
+          }, 400);
+        }
       }
     },
     initUser() {
@@ -284,6 +314,10 @@ export default {
         console.log(res);
       }
     });
+  },
+  onPageScroll: function(e) {
+    // 获取滚动条当前位置
+    this.scroll = e.scrollTop;
   },
   onLoad() {
     const _that = this;
