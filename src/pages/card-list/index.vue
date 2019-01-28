@@ -57,7 +57,7 @@
         <div class="top">
           <text class="symbol">￥</text>
           <text class="num">{{currentNum}}</text>
-          <text class="normal">红包代金券</text>
+          <text class="normal">现金券</text>
         </div>
         <div class="bottom">
           <text>- </text>
@@ -74,11 +74,11 @@
         </div>
         <div class="detail">
           <span>
-            1、在中国大陆地区任意名创优品门店（西藏地区除外）。
+            1、在中国大陆地区任意名创优品门店可使用（西藏、港澳台地区除外）。
           </span>
           <br>
           <span>
-            2、消费满148元可用10元及以下面额红包、消费满148元可用所有面额红包（单笔订单仅可使用一张红包券），直接抵扣现金。
+            2、单笔订单消费满148可使用任意面额现金券一张、满48可使用10元及以下面额现金券一张，可直接抵用现金。
           </span>
         </div>
       </div>

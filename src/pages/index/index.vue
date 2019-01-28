@@ -151,7 +151,7 @@ export default {
       } else if (res.code === 10004) {
         wx.showModal({
           title: "提示",
-          content: "今日免费抽奖次数已用完，分享活动可以奖励一次抽奖次数噢",
+          content: "今日免费抽奖次数已用完，分享给好友还可获得2次抽奖机会噢！",
           confirmText: "去分享",
           confirmColor: "#D9232F",
           success(res) {
