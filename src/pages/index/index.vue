@@ -45,14 +45,16 @@
         <li>
           <i class="circle"></i>
           <span class="title">活动形式：</span>
-          <span>领券规则：（1）在2019年2月4日-2019年2月11日，会员进入红包小程序领取现金券；非会员可进入小程序登录注册会员后再领取现金券；（2）每位会员每天限领取一次，当天保存及分享图片再获得一次领券机会，分享次数上限为两次</span><br>
-          <span>用券规则：（1）会员成功领取现金券后，在2019年2月4日-2019年2月28日期间，消费满额后凭券码直接抵扣现金 （2）消费满48元或以上（含48元）可使用一张10元及以下任意金额（含10元）的现金券抵扣现金 （3）消费满148元或以上（含148元）可使用一张任意金额的现金券抵扣现金 （4）每人每单满额限使用一张现金券 （5）本次现金券活动不与门店其他活动同时享用</span>
+          <span>领券规则：</span><br>
+          <span>（1）在2019年2月4日-2019年2月11日，会员进入红包小程序领取现金券；非会员可进入小程序登录注册会员后再领取现金券；（2）每位会员每天限领取一次，当天保存及分享图片再获得一次领券机会，分享次数上限为两次；（3）数量有限，先到先得。</span><br>
+          <span>用券规则：</span><br>
+          <span>（1）会员成功领取现金券后，在2019年2月4日-2019年2月28日期间，消费满额后凭券码直接抵扣现金 （2）消费满48元或以上（含48元）可使用一张10元及以下任意金额（含10元）的现金券抵扣现金 （3）消费满148元或以上（含148元）可使用一张任意金额的现金券抵扣现金 （4）每人每单满额限使用一张现金券 （5）本次现金券活动不与门店其他活动同时享用</span>
         </li>
         <li>
           <i class="circle"></i>
           <span class="title">温馨提示：</span>
           <span>
-            a)名创优品将依法运营本活动，但若收银计算机病毒、系统故障、自然灾害等不可抗力原因需要取消、暂停或延期活动的，名创优品无需为不可抗力时事件承担任何赔偿或补偿责任。 b)参与本次活动的用户即视为同意并遵守活动规则，不得违反中华人民共和国法律法规及本活动的相关规定。本次活动仅限中国大陆地区名创优品门店（西藏地区除外），不包括港澳台以及国外。 c)MINISO名创优品在法律许可范围内保留对本活动的最终解释权。 d)如有任何疑问，可拨打客服热线：400-700-5553，我们会尽快帮您处理。（客服服务时间：周一-周五8:30-20:00）。</span>
+            a)名创优品将依法运营本活动，但若收银计算机病毒、系统故障、自然灾害等不可抗力原因需要取消、暂停或延期活动的，名创优品无需为不可抗力时事件承担任何赔偿或补偿责任。 b)参与本次活动的用户即视为同意并遵守活动规则，不得违反中华人民共和国法律法规及本活动的相关规定。本次活动仅限中国大陆地区名创优品门店（港澳台以及西藏地区不参与）。 c)MINISO名创优品在法律许可范围内保留对本活动的最终解释权。 d)如有任何疑问，可拨打客服热线：400-700-5553，我们会尽快帮您处理。（客服服务时间：周一-周五8:30-20:00）。</span>
         </li>
         <div style="widht:100%;height:66rpx;"></div>
       </div>
@@ -103,7 +105,8 @@ export default {
       awardNum: 0,
       show_rule: false,
       scroll: 0,
-      ruleTips: "点击查看活动规则"
+      ruleTips: "点击查看活动规则",
+      IAC: null
     };
   },
   methods: {
@@ -142,7 +145,7 @@ export default {
     async drawAward() {
       const data = {
         uid: this.userData.uid,
-        activityId: 1
+        activityId: 2
       };
       const _that = this;
       let res = await this.$mutils.fetchData(API.DRAW, data, "post");
@@ -203,7 +206,7 @@ export default {
     initUser() {
       const data = {
         ...this.userInfo,
-        activityId: 1
+        activityId: 2
       };
       this.$mutils
         .fetchData(API.INIT, data, "post")
@@ -226,7 +229,7 @@ export default {
     },
     initActive() {
       const data = {
-        activityId: 1
+        activityId: 2
       };
       this.$mutils
         .fetchData(API.DETAIL, data)
@@ -256,7 +259,7 @@ export default {
         extraData: {
           foo: "bar"
         },
-        envVersion: "develop",
+        envVersion: "release",
         success(res) {
           // 打开成功
         }
@@ -321,6 +324,12 @@ export default {
       }
     });
   },
+  onShow() {
+    this.IAC = wx.createInnerAudioContext();
+    this.IAC.src = "/static/images/mp3.mp3";
+    this.IAC.autoplay = true;
+    this.IAC.loop = true;
+  },
   onPageScroll: function(e) {
     // 获取滚动条当前位置
     this.scroll = e.scrollTop;
@@ -339,6 +348,12 @@ export default {
   onUnload() {
     this.open = false;
     this.showScreen = false;
+    this.IAC.destroy();
+  },
+  onHide() {
+    this.open = false;
+    this.showScreen = false;
+    this.IAC.destroy();
   }
 };
 </script>

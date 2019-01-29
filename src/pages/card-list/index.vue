@@ -21,8 +21,8 @@
               </div>
               <div class="t_right">
                 <span class="rule">{{item.name}}</span>
-                <span class="time">2019.02.04-2019.02.10</span>
-                <span class="tips">点击您准备使用的优惠券可查看券码</span>
+                <span class="time">{{item.start}} - {{item.end}}</span>
+                <span class="tips">点击查看优惠券券码</span>
               </div>
             </div>
           </div>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="t_right ">
                   <span class="rule ">{{item.useRule}}</span>
-                  <span class="time ">2019.02.04-2019.02.10</span>
+                  <span class="time ">{{item.start}} - {{item.end}}</span>
                 </div>
               </div>
               <div class="hadUse ">
@@ -121,11 +121,17 @@ export default {
     async getList() {
       const data = {
         uid: this.uid,
-        activityId: "1",
+        activityId: "2",
         status: "0"
       };
       let res = await this.$mutils.fetchData(API.AWARD_RECORD, data);
       this.cardList = res.data;
+      res.data.forEach((item, index) => {
+        let startTem = item.beginDate.split(" ")[0].split("-");
+        let endTem = item.endDate.split(" ")[0].split("-");
+        this.cardList[index].start = `${startTem[0]}.${startTem[1]}.${startTem[2]}`;
+        this.cardList[index].end = `${endTem[0]}.${endTem[1]}.${endTem[2]}`;
+      });
       this.allHeight = this.cardList.length * (200 + 20) + 20 + "rpx";
       this.didHeight =
         this.cardList.filter(item => {
@@ -143,11 +149,13 @@ export default {
           : this.useHeight + "px";
     },
     cardDtail(data) {
+      let startTem = data.beginDate.split(" ")[0].split("-");
+      let endTem = data.endDate.split(" ")[0].split("-");
       this.showScreen = true;
       this.currentNum = data.faceValue;
       this.currentRule = data.name;
-      this.start = data.beginDate.split(" ")[0];
-      this.end = data.endDate.split(" ")[0];
+      this.start = `${startTem[0]}.${startTem[1]}.${startTem[2]}`;
+      this.end = `${endTem[0]}.${endTem[1]}.${endTem[2]}`;
       this.code = data.code;
       wxbarcode.barcode("barcode", data.code, 611, 120);
     },

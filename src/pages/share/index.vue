@@ -81,7 +81,7 @@ export default {
     async addPoints() {
       const data = {
         uid: this.uid,
-        activityId: "1"
+        activityId: "2"
       };
       let res = await this.$mutils.fetchData(API.ADD_POINTS, data, "psot");
       if (res.code === 200) {

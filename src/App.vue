@@ -4,7 +4,8 @@ export default {
     console.log(options.referrerInfo.extraData);
     if (
       options.referrerInfo.appId &&
-      options.referrerInfo.appId === "wx2a212470bade49bf"
+      options.referrerInfo.appId === "wx2a212470bade49bf" &&
+      options.referrerInfo.extraData.data.nick
     ) {
       wx.setStorage({
         key: "userInfoMiniso",

@@ -10,7 +10,7 @@
 	},
 	"miniprogramRoot": "dist/",
 	"compileType": "miniprogram",
-	"appid": "wx907d6d6b7eba0cb9",
+	"appid": "wx3f8d2b1cd9446815",
 	"projectname": "luckDraw",
 	"condition": {
 		"search": {
