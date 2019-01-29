@@ -9,7 +9,7 @@
       <span>亲，你还没有现金券哦</span>
       <button @tap="draw">马上去抽奖</button>
     </div>
-    <swiper :current="currentTab" duration="300" @change="swiperTab" v-if="cardList.length > 0" :style="{height:currentTab==0?allHeight:didHeight}"  >
+    <swiper :current="currentTab" duration="300" @change="swiperTab" v-if="cardList.length > 0" :style="{height:currentTab==0?allHeight:didHeight}">
       <swiper-item>
         <div class="list_wrapper">
           <div class="item" v-for="(item,index) in cardList" :key="index" @tap="cardDtail(item)" v-if="item.status === '未使用' ">
@@ -22,6 +22,7 @@
               <div class="t_right">
                 <span class="rule">{{item.name}}</span>
                 <span class="time">2019.02.04-2019.02.10</span>
+                <span class="tips">点击您准备使用的优惠券可查看券码</span>
               </div>
             </div>
           </div>
@@ -192,13 +193,31 @@ export default {
       }
     };
   },
-  onLoad(options) {
+  // onLoad(options) {
+  //   const width = wx.getSystemInfoSync().screenWidth;
+  //   const height = wx.getSystemInfoSync().screenHeight;
+  //   const radio = width / 750;
+  //   this.useHeight = height - 88 - radio * 88;
+  //   this.uid = options.uid;
+  //   wx.setStorage({
+  //     key: "minisoUidForCard",
+  //     data: options.uid
+  //   });
+  //   this.getList();
+  // },
+  onShow() {
+    const _that = this;
     const width = wx.getSystemInfoSync().screenWidth;
     const height = wx.getSystemInfoSync().screenHeight;
     const radio = width / 750;
     this.useHeight = height - 88 - radio * 88;
-    this.uid = options.uid;
-    this.getList();
+    wx.getStorage({
+      key: "minisoUidForCard",
+      success(res) {
+        _that.uid = res.data;
+        _that.getList();
+      }
+    });
   }
 };
 </script>
